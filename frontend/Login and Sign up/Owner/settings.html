@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings</title>
+  <link rel="stylesheet" href="gian.css">
+</head>
+<body>
+  <nav class="sidebar">
+    <img class="logo" src="logo.png" alt="A.S. De Leon Glass and Aluminum Fabrication">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customer-orders.html">Customer orders</a>
+    <a href="inquiries.html">Inquiries</a>
+    <a href="sales-reports.html">Sales reports</a>
+    <a href="employee-payroll.html">Employee payroll</a>
+    <a href="attendance.html">Attendance</a>
+    <div class="bottom">
+      <a href="settings.html" class="active">Settings</a>
+      <a href="login.html">Log out</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Settings</h1>
+    <p class="sub">Your Owner account and shop details</p>
+
+    <div class="row">
+      <!-- Change password -->
+      <form class="card" id="passwordForm">
+        <h2>Change password</h2>
+        <div id="passwordMsg" class="msg"></div>
+
+        <label for="current">Current password</label>
+        <input type="password" id="current" name="current" autocomplete="current-password">
+
+        <label for="new">New password</label>
+        <input type="password" id="new" name="new" autocomplete="new-password">
+
+        <label for="confirm">Confirm new password</label>
+        <input type="password" id="confirm" name="confirm" autocomplete="new-password">
+
+        <button class="full">Update password</button>
+      </form>
+
+      <!-- Shop details -->
+      <form class="card" id="shopForm">
+        <h2>Shop details</h2>
+        <div id="shopMsg" class="msg"></div>
+
+        <label for="business_name">Business name</label>
+        <input id="business_name" name="business_name">
+
+        <label for="address">Address</label>
+        <input id="address" name="address">
+
+        <label for="contact_no">Contact number</label>
+        <input id="contact_no" name="contact_no">
+
+        <button class="full light">Save details</button>
+      </form>
+    </div>
+
+    <!-- Owner account -->
+    <div class="card">
+      <h2>Owner account</h2>
+      <p class="muted" id="ownerInfo"></p>
+    </div>
+  </main>
+
+  <script src="../backend/common.js"></script>
+  <script src="../backend/settings.js"></script>
+</body>
+</html>
