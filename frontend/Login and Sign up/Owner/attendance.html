@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Attendance</title>
+  <link rel="stylesheet" href="gian.css">
+</head>
+<body>
+  <nav class="sidebar">
+    <img class="logo" src="logo.png" alt="A.S. De Leon Glass and Aluminum Fabrication">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customer-orders.html">Customer orders</a>
+    <a href="inquiries.html">Inquiries</a>
+    <a href="sales-reports.html">Sales reports</a>
+    <a href="employee-payroll.html">Employee payroll</a>
+    <a href="attendance.html" class="active">Attendance</a>
+    <div class="bottom">
+      <a href="settings.html">Settings</a>
+      <a href="login.html">Log out</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="top">
+      <div>
+        <h1>Attendance</h1>
+        <p class="sub">Time in and time out of your crew, recorded from QR scans</p>
+      </div>
+      <div class="no-print">
+        <a class="btn light" href="employee-payroll.html">Send to payroll</a>
+        <a class="btn" href="qr-scanner.html">Scan attendance</a>
+      </div>
+    </div>
+    <div id="msg" class="msg"></div>
+
+    <div class="stats">
+      <div class="card"><div class="muted">Present today</div><div class="num" id="present">0</div><div class="muted" id="total">of 0 employees</div></div>
+      <div class="card"><div class="muted">Late</div><div class="num" id="late">0</div><div class="muted">after 8:00 AM</div></div>
+      <div class="card"><div class="muted">Not yet in</div><div class="num" id="notIn">0</div><div class="muted">no scan so far</div></div>
+      <div class="card"><div class="muted">Timed out</div><div class="num" id="timedOut">0</div><div class="muted">finished for the day</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Daily attendance</h2>
+      <div class="row">
+        <div><label for="date">Date</label><input type="date" id="date"></div>
+        <div><label for="search">Employee</label><input id="search" placeholder="Search name"></div>
+      </div>
+      <br>
+      <table>
+        <thead>
+          <tr><th>Employee</th><th>Position</th><th>Time in</th><th>Time out</th><th>Hours</th><th>Status</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../backend/common.js"></script>
+  <script src="../backend/attendance.js"></script>
+</body>
+</html>
