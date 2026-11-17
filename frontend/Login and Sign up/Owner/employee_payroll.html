@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employee payroll</title>
+  <link rel="stylesheet" href="gian.css">
+</head>
+<body>
+  <nav class="sidebar">
+    <img class="logo" src="logo.png" alt="A.S. De Leon Glass and Aluminum Fabrication">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customer-orders.html">Customer orders</a>
+    <a href="inquiries.html">Inquiries</a>
+    <a href="sales-reports.html">Sales reports</a>
+    <a href="employee-payroll.html" class="active">Employee payroll</a>
+    <a href="attendance.html">Attendance</a>
+    <div class="bottom">
+      <a href="settings.html">Settings</a>
+      <a href="login.html">Log out</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="top">
+      <div>
+        <h1>Weekly payroll</h1>
+        <p class="sub">Enter work hours, rate and deductions to compute the week's wages</p>
+      </div>
+    </div>
+    <div id="msg" class="msg"></div>
+
+    <form id="payrollForm" class="row no-print">
+
+      <!-- Payroll entry -->
+      <div class="card" style="flex: 2">
+        <h2>Payroll entry</h2>
+        <div class="row">
+          <div>
+            <label for="employee_name">Employee name</label>
+            <input id="employee_name" name="employee_name">
+          </div>
+          <div>
+            <label for="position">Position</label>
+            <input id="position" name="position">
+          </div>
+        </div>
+        <div class="row">
+          <div><label for="week_start">Week starting</label><input type="date" id="week_start" name="week_start"></div>
+          <div><label for="week_end">Week ending</label><input type="date" id="week_end" name="week_end"></div>
+          <div><label for="hours">Work hours</label><input type="number" id="hours" name="hours" min="0" step="0.1" value="0"></div>
+          <div><label for="rate">Rate per hour (₱)</label><input type="number" id="rate" name="rate" min="0" step="0.01" value="0"></div>
+        </div>
+        <label>Deductions (₱)</label>
+        <div class="row">
+          <div><label for="late">Late arrival</label><input type="number" id="late" name="late" min="0" step="0.01" value="0"></div>
+          <div><label for="absence">Absence</label><input type="number" id="absence" name="absence" min="0" step="0.01" value="0"></div>
+          <div><label for="wrong_project">Wrong project</label><input type="number" id="wrong_project" name="wrong_project" min="0" step="0.01" value="0"></div>
+        </div>
+      </div>
+
+      <!-- Wage computation -->
+      <div style="flex: 1">
+        <div class="card calc">
+          <h2>Wage computation</h2>
+          <p><span>Hours × rate</span><span id="calcRate">0 × ₱0.00</span></p>
+          <p><span>Gross wage</span><span id="gross">₱0.00</span></p>
+          <p><span>Total deductions</span><span id="deductions">₱0.00</span></p>
+          <p class="net"><span>Net wage</span><span id="net">₱0.00</span></p>
+        </div>
+        <button class="full">Save payroll record</button>
+      </div>
+    </form>
+
+    <!-- Payroll records -->
+    <div class="card">
+      <h2>Payroll records</h2>
+      <table>
+        <thead>
+          <tr><th>Employee</th><th>Position</th><th>Week</th><th>Hours</th><th>Gross</th><th>Deductions</th><th>Net</th></tr>
+        </thead>
+        <tbody id="records"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../backend/common.js"></script>
+  <script src="../backend/employee-payroll.js"></script>
+</body>
+</html>
