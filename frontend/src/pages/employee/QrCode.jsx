@@ -24,6 +24,20 @@ export default function QrCode() {
 
                 setUser(meData.user)
 
+                // Check PIN status first
+                const pinRes  = await fetch('/api/employee/pin-status', { credentials: 'include' })
+                const pinData = await pinRes.json().catch(() => ({}))
+
+                if (!pinData.hasPin) {
+                    navigate('/employee/set-pin')
+                    return
+                }
+
+                if (!pinData.pinVerified) {
+                    navigate('/employee/verify-pin')
+                    return
+                }
+
                 const res  = await fetch('/api/employee/my-today', { credentials: 'include' })
                 const json = await res.json().catch(() => ({}))
 
@@ -60,8 +74,8 @@ export default function QrCode() {
             box.innerHTML = ''
             new window.QRCode(box, {
                 text:         empCode,
-                width:        180,
-                height:       180,
+                width:        256,
+                height:       256,
                 correctLevel: window.QRCode.CorrectLevel.M
             })
         }
@@ -92,48 +106,26 @@ export default function QrCode() {
                 {error && <p className="alert show" role="alert">{error}</p>}
 
                 {data && (
-                    <div className="grid-qr">
-                        <article className="panel">
-                            <header className="panel-head">
-                                <h2>Your attendance QR</h2>
-                                {emp.status !== 'active'
-                                    ? <span className="badge badge-absent">Suspended</span>
-                                    : <span className="badge badge-ok">Active</span>
-                                }
-                            </header>
+                    <div className="qr-layout">
 
-                            <div className="qr-box" ref={qrBoxRef}>Loading...</div>
-                            <p className="qr-name">{emp.full_name}</p>
-                            <p className="qr-meta">
-                                {[emp.position, emp.employee_code ? 'ID ' + emp.employee_code : null]
-                                    .filter(Boolean).join(' · ')}
-                            </p>
-                            <p className="qr-note">This code is yours only. Do not share it with others.</p>
-                        </article>
-
-                        <div className="side-stack">
-                            <article className="panel">
+                        {/* Top row: QR left, How it works right */}
+                        <div className="qr-top-row">
+                            <article className="panel qr-panel">
                                 <header className="panel-head">
-                                    <h2>Today</h2>
-                                    <p className="today-date">{today.date_label}</p>
+                                    <h2>Your attendance QR</h2>
+                                    {emp.status !== 'active'
+                                        ? <span className="badge badge-absent">Suspended</span>
+                                        : <span className="badge badge-ok">Active</span>
+                                    }
                                 </header>
 
-                                <div className="time-grid">
-                                    <section className="time-box">
-                                        <h3>Time in</h3>
-                                        <p className="time-value">{today.time_in || '—'}</p>
-                                        <StatusBadge status={today.time_in ? today.status : 'pending'} />
-                                    </section>
-
-                                    <section className="time-box">
-                                        <h3>Time out</h3>
-                                        <p className="time-value">{today.time_out || '—'}</p>
-                                        {today.time_out
-                                            ? <span className="badge badge-ok">Recorded</span>
-                                            : <StatusBadge status="pending" />
-                                        }
-                                    </section>
-                                </div>
+                                <div className="qr-box-large" ref={qrBoxRef}>Loading...</div>
+                                <p className="qr-name">{emp.full_name}</p>
+                                <p className="qr-meta">
+                                    {[emp.position, emp.employee_code ? 'ID ' + emp.employee_code : null]
+                                        .filter(Boolean).join(' · ')}
+                                </p>
+                                <p className="qr-note">This code is yours only. Do not share it with others.</p>
                             </article>
 
                             <article className="panel">
@@ -151,9 +143,39 @@ export default function QrCode() {
                                         <strong>It is recorded</strong>
                                         <span>The first scan of the day is time in, the next is time out.</span>
                                     </li>
+                                    <li>
+                                        <strong>Check your attendance</strong>
+                                        <span>See your time in and time out in the Today section below.</span>
+                                    </li>
                                 </ol>
                             </article>
                         </div>
+
+                        {/* Bottom: Today tiles */}
+                        <article className="panel">
+                            <header className="panel-head">
+                                <h2>Today</h2>
+                                <p className="today-date">{today.date_label}</p>
+                            </header>
+
+                            <div className="time-grid">
+                                <section className="time-box">
+                                    <h3>Time in</h3>
+                                    <p className="time-value">{today.time_in || '—'}</p>
+                                    <StatusBadge status={today.time_in ? today.status : 'pending'} />
+                                </section>
+
+                                <section className="time-box">
+                                    <h3>Time out</h3>
+                                    <p className="time-value">{today.time_out || '—'}</p>
+                                    {today.time_out
+                                        ? <span className="badge badge-ok">Recorded</span>
+                                        : <StatusBadge status="pending" />
+                                    }
+                                </section>
+                            </div>
+                        </article>
+
                     </div>
                 )}
             </main>
