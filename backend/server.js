@@ -15,7 +15,7 @@ const app = express();
 // MIDDLEWARE
 // ==========================================
 app.use(cors({
-    origin: true,
+    origin:      ['http://localhost:5173', 'http://127.0.0.1:5173'],
     credentials: true
 }));
 
@@ -58,6 +58,6 @@ app.get('/api/test', async (req, res) => {
 // START SERVER
 // ==========================================
 const PORT = Number(process.env.PORT) || 5000;
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

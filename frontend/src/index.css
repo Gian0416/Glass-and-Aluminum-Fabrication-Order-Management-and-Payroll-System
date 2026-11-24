@@ -5,44 +5,27 @@
     font-family: 'Segoe UI', Calibri, "Helvetica Neue", Arial, sans-serif;
 }
 
-html {
-    height: 100%;
-    width: 100%;
-}
-
 body {
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
-    min-width: 100vw;
     background-color: #f3f4f8;
     color: #162033;
+    min-height: 100vh;
 }
 
 #root {
     min-height: 100vh;
-    min-width: 100vw;
-    display: flex;
-    flex-direction: column;
 }
 
 /* ---- Centered layout wrapper (Welcome, Login, Signup, VerifyOtp) ---- */
 .layout-centered {
-    flex: 1;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
-    min-height: 100vh;
-    width: 100%;
 }
 
-/* ---- Portal layout wrapper (QR, Attendance, Deduction, SetPin, VerifyPin) ---- */
+/* ---- Portal layout wrapper (QR, Attendance, Deduction) ---- */
 .layout-portal {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
-    width: 100%;
-    padding: 16px;
+    padding: 24px;
 }

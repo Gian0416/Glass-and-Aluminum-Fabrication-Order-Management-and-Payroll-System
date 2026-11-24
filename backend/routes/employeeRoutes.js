@@ -7,22 +7,12 @@ import {
     updateEmployee,
     deleteEmployee
 } from '../controllers/employeeController.js';
-import {
-    setPin,
-    verifyPin,
-    pinStatus
-} from '../controllers/pinController.js';
 
 const router = express.Router();
 
 // GET  /api/employee/my-today — get logged-in employee's QR and today's attendance
 // NOTE: this must be BEFORE /:id to avoid "my-today" being treated as an id
-router.get('/my-today',    getMyToday);
-
-// PIN routes
-router.get('/pin-status',  pinStatus);
-router.post('/set-pin',    setPin);
-router.post('/verify-pin', verifyPin);
+router.get('/my-today', getMyToday);
 
 // GET  /api/employee          — get all employees
 router.get('/', getAllEmployees);
