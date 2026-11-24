@@ -7,6 +7,8 @@ import VerifyOtp  from './pages/VerifyOtp'
 import QrCode     from './pages/employee/QrCode'
 import Attendance from './pages/employee/Attendance'
 import Deduction  from './pages/employee/Deduction'
+import SetPin     from './pages/employee/SetPin'
+import VerifyPin  from './pages/employee/VerifyPin'
 
 export default function App() {
     return (
@@ -19,9 +21,11 @@ export default function App() {
                 <Route path="/verify-otp"  element={<VerifyOtp />} />
 
                 {/* Employee */}
-                <Route path="/employee/qr"        element={<QrCode />} />
-                <Route path="/employee/attendance" element={<Attendance />} />
-                <Route path="/employee/deduction"  element={<Deduction />} />
+                <Route path="/employee/qr"         element={<QrCode />} />
+                <Route path="/employee/attendance"  element={<Attendance />} />
+                <Route path="/employee/deduction"   element={<Deduction />} />
+                <Route path="/employee/set-pin"     element={<SetPin />} />
+                <Route path="/employee/verify-pin"  element={<VerifyPin />} />
 
                 {/* Owner — placeholder until owner pages are built */}
                 <Route path="/owner/dashboard" element={<div style={{ padding: 40 }}>Owner dashboard — coming soon.</div>} />
